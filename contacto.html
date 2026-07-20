@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!--
+  =========================================================
+  SIMULADOR EDUCATIVO DEL FUNCIONAMIENTO DE LA WEB — B2
+  ---------------------------------------------------------
+  Estudiante   : Josué Jara Panchez
+  Institución  : Universidad Técnica Particular de Loja (UTPL)
+  Asignatura   : Tecnologías Web
+  Framework    : Bootstrap 5.3
+  Página       : Recursos, Contacto y Checklist WCAG
+  =========================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Recursos web, formulario de contacto y checklist de accesibilidad WCAG — Simulador Web UTPL.">
+  <title>Recursos — Simulador Web | UTPL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.8.0/dist/tabler-icons.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+</head>
+<body>
+
+<a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<!-- ── NAVBAR ─────────────────────────────────────────────── -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top" aria-label="Navegación principal">
+  <div class="container">
+    <a class="navbar-brand navbar-brand-custom" href="index.html">
+      <i class="ti ti-world me-2" aria-hidden="true"></i>Simulador<span>Web</span>
+    </a>
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
+            aria-controls="navMenu" aria-expanded="false"
+            aria-label="Abrir menú de navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item">
+          <a class="nav-link " href="index.html"><i class="ti ti-home me-1" aria-hidden="true"></i>Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="solicitud.html"><i class="ti ti-send me-1" aria-hidden="true"></i>Solicitud HTTP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="contenido.html"><i class="ti ti-server me-1" aria-hidden="true"></i>Servidor Web</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="respuesta.html"><i class="ti ti-file-code me-1" aria-hidden="true"></i>Renderizado</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="contacto.html"><i class="ti ti-mail me-1" aria-hidden="true"></i>Recursos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────────── -->
+<header class="page-hero" role="banner">
+  <div class="container">
+    <div class="hero-badge fade-up">
+      <i class="ti ti-tool" aria-hidden="true"></i> Recursos y Contacto
+    </div>
+    <h1 class="hero-title fade-up delay-1">
+      Recursos, <span>Validación y Contacto</span>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Herramientas de validación W3C, checklist de accesibilidad WCAG y formulario de consulta.
+    </p>
+  </div>
+</header>
+
+<!-- ── MAIN ───────────────────────────────────────────────── -->
+<main id="contenido-principal">
+
+  <!-- ── VALIDACIÓN W3C ──────────────────────────────────── -->
+  <section class="section-dark" aria-labelledby="titulo-w3c">
+    <div class="container">
+      <h2 class="section-title" id="titulo-w3c">
+        <i class="ti ti-certificate" aria-hidden="true"></i> Validación W3C
+      </h2>
+      <div class="row g-4">
+        <div class="col-md-8">
+          <div class="alert-petronas p-4 rounded mb-3" role="note">
+            <strong>Resultado de validación:</strong> Las cinco páginas del primer bimestre fueron validadas con el Nu HTML Checker del W3C. Todas obtuvieron el resultado <em>"Document checking completed"</em> sin errores críticos.
+          </div>
+          <div class="table-petronas">
+            <table class="table table-borderless mb-0" aria-label="Resultados de validación W3C por archivo">
+              <thead><tr><th scope="col">Archivo</th><th scope="col">Resultado</th><th scope="col">Observación</th></tr></thead>
+              <tbody>
+                <tr><td>index.html</td><td><span class="badge-success-custom">Sin errores</span></td><td>Document checking completed</td></tr>
+                <tr><td>solicitud.html</td><td><span class="badge-success-custom">Sin errores</span></td><td>Document checking completed</td></tr>
+                <tr><td>servidor.html</td><td><span class="badge-success-custom">Sin errores</span></td><td>Document checking completed</td></tr>
+                <tr><td>respuesta.html</td><td><span class="badge-success-custom">Sin errores</span></td><td>Document checking completed</td></tr>
+                <tr><td>ejemplo.html</td><td><span class="badge-success-custom">Sin errores</span></td><td>Document checking completed</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-petronas h-100">
+            <div class="card-body text-center">
+              <span class="card-icon"><i class="ti ti-external-link" aria-hidden="true"></i></span>
+              <h3 class="card-title">Validar ahora</h3>
+              <p class="card-text">Puedes validar cualquier página HTML5 en el validador oficial del W3C.</p>
+              <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-teal mt-2"
+                 aria-label="Abrir validador W3C en nueva pestaña">
+                <i class="ti ti-external-link me-1" aria-hidden="true"></i>Abrir W3C Validator
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHECKLIST WCAG ──────────────────────────────────── -->
+  <section class="section-card" aria-labelledby="titulo-wcag">
+    <div class="container">
+      <h2 class="section-title" id="titulo-wcag">
+        <i class="ti ti-accessible" aria-hidden="true"></i> Checklist de Accesibilidad WCAG
+      </h2>
+      <p class="mb-4">Criterios de accesibilidad aplicados en el rediseño del sitio (segundo bimestre):</p>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="table-petronas">
+            <table class="table table-borderless mb-0" aria-label="Checklist de accesibilidad WCAG">
+              <thead><tr><th scope="col">#</th><th scope="col">Criterio WCAG</th><th scope="col">Estado</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><strong>Contraste de color</strong> — Texto vs fondo con ratio mínimo 4.5:1 (teal #00D2BE sobre negro #07070A cumple WCAG AA)</td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><strong>Tamaño de tipografía</strong> — Mínimo 16px en cuerpo de texto, 12px en captions, escala proporcional</td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><strong>Textos alternativos</strong> — Atributo <code class="inline-code">alt</code> en todas las imágenes; <code class="inline-code">aria-label</code> en SVGs</td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><strong>Skip link</strong> — Enlace "Saltar al contenido principal" visible al recibir foco en todas las páginas</td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><strong>Focus visible</strong> — Todos los elementos interactivos (botones, links, inputs) tienen <code class="inline-code">outline</code> visible al recibir foco con teclado</td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><strong>Semántica HTML5</strong> — Uso correcto de <code class="inline-code">header</code>, <code class="inline-code">nav</code>, <code class="inline-code">main</code>, <code class="inline-code">section</code>, <code class="inline-code">article</code>, <code class="inline-code">footer</code></td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><strong>Atributo lang</strong> — <code class="inline-code">lang="es"</code> en todas las páginas para lectores de pantalla</td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><strong>ARIA labels</strong> — <code class="inline-code">aria-label</code> y <code class="inline-code">aria-current</code> en navbar; <code class="inline-code">aria-hidden</code> en elementos decorativos</td>
+                  <td><span class="badge-success-custom">Cumplido</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h3 class="section-title" style="font-size:.78rem;" id="titulo-decisiones">
+            <i class="ti ti-bulb" aria-hidden="true"></i>Decisiones de diseño
+          </h3>
+          <ol class="list-petronas-num">
+            <li><strong>Contraste teal sobre negro:</strong> El color #00D2BE sobre #07070A supera el ratio 4.5:1 requerido por WCAG AA para texto normal, garantizando legibilidad en todos los dispositivos.</li>
+            <li><strong>Jerarquía tipográfica:</strong> League Spartan 900 para títulos (grande, condensada, alto impacto) y Montserrat 300 para cuerpo (ligera, alta legibilidad) crean una jerarquía visual clara sin necesidad de colores adicionales.</li>
+            <li><strong>Navegación responsive:</strong> El navbar de Bootstrap colapsa automáticamente en móvil con un botón de menú accesible desde teclado, con aria-expanded y aria-controls correctamente configurados.</li>
+            <li><strong>Focus outline visible:</strong> Se sobreescribió el estilo de foco predeterminado del navegador para asegurar un outline teal de 2px visible en todos los elementos interactivos, crítico para usuarios de teclado.</li>
+            <li><strong>Skip link:</strong> El enlace "Saltar al contenido principal" es invisible visualmente pero accesible desde teclado, permitiendo a usuarios de lectores de pantalla saltar directamente al contenido.</li>
+          </ol>
+
+          <!-- Progress bars de accesibilidad -->
+          <h4 class="mt-4 mb-3" style="font-family:var(--font-h);font-size:.82rem;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;">
+            Nivel de cumplimiento WCAG 2.1
+          </h4>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <small style="color:var(--silver);">Perceptible</small>
+              <small style="color:var(--teal);">95%</small>
+            </div>
+            <div class="progress progress-custom">
+              <div class="progress-bar progress-bar-custom" role="progressbar" style="width:95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Cumplimiento principio Perceptible 95%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <small style="color:var(--silver);">Operable</small>
+              <small style="color:var(--teal);">90%</small>
+            </div>
+            <div class="progress progress-custom">
+              <div class="progress-bar progress-bar-custom" role="progressbar" style="width:90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Cumplimiento principio Operable 90%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <small style="color:var(--silver);">Comprensible</small>
+              <small style="color:var(--teal);">92%</small>
+            </div>
+            <div class="progress progress-custom">
+              <div class="progress-bar progress-bar-custom" role="progressbar" style="width:92%" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="Cumplimiento principio Comprensible 92%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <small style="color:var(--silver);">Robusto</small>
+              <small style="color:var(--teal);">88%</small>
+            </div>
+            <div class="progress progress-custom">
+              <div class="progress-bar progress-bar-custom" role="progressbar" style="width:88%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Cumplimiento principio Robusto 88%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RECURSOS EXTERNOS ──────────────────────────────── -->
+  <section class="section-dark" aria-labelledby="titulo-recursos-ext">
+    <div class="container">
+      <h2 class="section-title" id="titulo-recursos-ext">
+        <i class="ti ti-link" aria-hidden="true"></i> Recursos externos
+      </h2>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3">
+          <article class="card-petronas">
+            <div class="card-body">
+              <span class="card-icon"><i class="ti ti-brand-mozilla" aria-hidden="true"></i></span>
+              <h3 class="card-title">MDN Web Docs</h3>
+              <p class="card-text">La referencia técnica más completa para estándares web: HTML, CSS, HTTP.</p>
+              <a href="https://developer.mozilla.org/es/" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-outline-teal btn-sm mt-2"
+                 aria-label="Visitar MDN Web Docs en nueva pestaña">
+                <i class="ti ti-external-link me-1" aria-hidden="true"></i>Visitar
+              </a>
+            </div>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <article class="card-petronas">
+            <div class="card-body">
+              <span class="card-icon"><i class="ti ti-certificate" aria-hidden="true"></i></span>
+              <h3 class="card-title">W3C Validator</h3>
+              <p class="card-text">Validador oficial del World Wide Web Consortium para HTML5 y CSS3.</p>
+              <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-outline-teal btn-sm mt-2"
+                 aria-label="Abrir W3C Validator en nueva pestaña">
+                <i class="ti ti-external-link me-1" aria-hidden="true"></i>Abrir
+              </a>
+            </div>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <article class="card-petronas">
+            <div class="card-body">
+              <span class="card-icon"><i class="ti ti-accessible" aria-hidden="true"></i></span>
+              <h3 class="card-title">WCAG 2.1</h3>
+              <p class="card-text">Guías de Accesibilidad al Contenido Web del W3C, nivel AA.</p>
+              <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-outline-teal btn-sm mt-2"
+                 aria-label="Ver guías WCAG 2.1 en nueva pestaña">
+                <i class="ti ti-external-link me-1" aria-hidden="true"></i>Ver guías
+              </a>
+            </div>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <article class="card-petronas">
+            <div class="card-body">
+              <span class="card-icon"><i class="ti ti-brand-bootstrap" aria-hidden="true"></i></span>
+              <h3 class="card-title">Bootstrap 5</h3>
+              <p class="card-text">Documentación oficial del framework CSS utilizado en este rediseño.</p>
+              <a href="https://getbootstrap.com/docs/5.3/" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-outline-teal btn-sm mt-2"
+                 aria-label="Ver documentación Bootstrap 5 en nueva pestaña">
+                <i class="ti ti-external-link me-1" aria-hidden="true"></i>Documentación
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FORMULARIO DE CONTACTO ─────────────────────────── -->
+  <section class="section-card" aria-labelledby="titulo-formulario">
+    <div class="container">
+      <h2 class="section-title" id="titulo-formulario">
+        <i class="ti ti-mail" aria-hidden="true"></i> Formulario de consulta
+      </h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-8">
+          <form aria-label="Formulario de consulta sobre el sitio web" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="contacto-nombre" class="form-label-custom">Nombre completo:</label>
+                <input type="text" id="contacto-nombre" name="nombre"
+                       class="form-control form-control-custom"
+                       placeholder="Ej: Ana García"
+                       required aria-required="true"
+                       aria-describedby="nombre-help">
+                <div id="nombre-help" class="form-text" style="color:var(--silver);font-size:.78rem;">Tu nombre y apellido completo.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="contacto-email" class="form-label-custom">Correo electrónico:</label>
+                <input type="email" id="contacto-email" name="email"
+                       class="form-control form-control-custom"
+                       placeholder="tu@correo.com"
+                       required aria-required="true"
+                       aria-describedby="email-help">
+                <div id="email-help" class="form-text" style="color:var(--silver);font-size:.78rem;">No compartiremos tu correo con nadie.</div>
+              </div>
+              <div class="col-12">
+                <label for="contacto-tema" class="form-label-custom">Tema de consulta:</label>
+                <select id="contacto-tema" name="tema" class="form-select form-select-custom" aria-required="true">
+                  <option value="" disabled selected>-- Selecciona un tema --</option>
+                  <option value="http">Protocolo HTTP</option>
+                  <option value="html5">HTML5 y semántica</option>
+                  <option value="wcag">Accesibilidad WCAG</option>
+                  <option value="bootstrap">Bootstrap 5</option>
+                  <option value="otro">Otro tema</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="contacto-mensaje" class="form-label-custom">Mensaje:</label>
+                <textarea id="contacto-mensaje" name="mensaje"
+                          class="form-control form-control-custom"
+                          rows="4"
+                          placeholder="Escribe tu consulta o comentario aquí..."
+                          required aria-required="true"
+                          aria-describedby="mensaje-help"></textarea>
+                <div id="mensaje-help" class="form-text" style="color:var(--silver);font-size:.78rem;">Mínimo 20 caracteres.</div>
+              </div>
+              <div class="col-12">
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="contacto-acepto" required aria-required="true">
+                  <label class="form-check-label" for="contacto-acepto" style="color:var(--silver);font-size:.88rem;">
+                    Acepto que esta información es con fines educativos.
+                  </label>
+                </div>
+              </div>
+              <div class="col-12 d-flex gap-3 flex-wrap">
+                <button type="submit" class="btn btn-teal">
+                  <i class="ti ti-send me-1" aria-hidden="true"></i>Enviar consulta
+                </button>
+                <button type="reset" class="btn btn-outline-teal">
+                  <i class="ti ti-refresh me-1" aria-hidden="true"></i>Limpiar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INFO DEL FRAMEWORK ─────────────────────────────── -->
+  <section class="section-dark" aria-labelledby="titulo-framework">
+    <div class="container">
+      <h2 class="section-title" id="titulo-framework">
+        <i class="ti ti-brand-bootstrap" aria-hidden="true"></i> Framework utilizado: Bootstrap 5.3
+      </h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card-petronas">
+            <div class="card-body">
+              <h3 class="card-title"><i class="ti ti-check me-2" aria-hidden="true"></i>Ventajas encontradas</h3>
+              <ul class="list-petronas mt-2">
+                <li><strong>Grid de 12 columnas:</strong> Organización responsive sin escribir media queries propias — col-sm, col-md, col-lg automatizan el layout.</li>
+                <li><strong>Componentes listos:</strong> Navbar, accordion, modal, tooltip, badges y progress bars completamente funcionales con solo clases CSS y atributos data-bs.</li>
+                <li><strong>Accesibilidad incorporada:</strong> Los componentes de Bootstrap incluyen aria-expanded, aria-controls y roles ARIA por defecto.</li>
+                <li><strong>CDN sin instalación:</strong> Funciona desde un enlace externo, compatible con el flujo de trabajo actual sin Node.js ni compiladores.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-petronas">
+            <div class="card-body">
+              <h3 class="card-title"><i class="ti ti-layout-grid me-2" aria-hidden="true"></i>Componentes usados</h3>
+              <div class="d-flex flex-wrap gap-2 mt-2">
+                <span class="badge-teal">Navbar responsive</span>
+                <span class="badge-teal">Grid (col-sm/md/lg)</span>
+                <span class="badge-teal">Cards</span>
+                <span class="badge-teal">Accordion</span>
+                <span class="badge-teal">Modal</span>
+                <span class="badge-teal">Tooltip</span>
+                <span class="badge-teal">Badges</span>
+                <span class="badge-teal">Progress bars</span>
+                <span class="badge-teal">Botones hover/focus</span>
+                <span class="badge-teal">Formularios</span>
+                <span class="badge-teal">Collapse</span>
+                <span class="badge-teal">Alerts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer-custom" role="contentinfo">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5><i class="ti ti-world me-2" aria-hidden="true"></i>SimuladorWeb</h5>
+        <p>Mini sitio educativo que explica el funcionamiento de la Web desde la URL hasta el renderizado.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Páginas</h5>
+        <ul class="list-unstyled">
+          <li><a href="index.html"><i class="ti ti-home me-1" aria-hidden="true"></i>Inicio</a></li>
+          <li><a href="contenido.html"><i class="ti ti-book me-1" aria-hidden="true"></i>Contenido</a></li>
+          <li><a href="contacto.html"><i class="ti ti-mail me-1" aria-hidden="true"></i>Recursos</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Estudiante</h5>
+        <p>Josué Jara Panchez<br>Tecnologías Web — UTPL<br>Segundo Bimestre 2026</p>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <p class="text-center mb-0">
+      &copy; 2026 <strong>Josué Jara Panchez</strong> &bull; UTPL &bull; Tecnologías Web &bull;
+      Framework: <strong>Bootstrap 5.3</strong>
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

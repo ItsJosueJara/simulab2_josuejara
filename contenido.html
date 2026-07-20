@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<!--
+  =========================================================
+  SIMULADOR EDUCATIVO DEL FUNCIONAMIENTO DE LA WEB — B2
+  ---------------------------------------------------------
+  Estudiante   : Josué Jara Panchez
+  Institución  : Universidad Técnica Particular de Loja (UTPL)
+  Asignatura   : Tecnologías Web
+  Framework    : Bootstrap 5.3
+  Página       : Contenido — HTTP, Servidor y Renderizado
+  =========================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Proceso completo HTTP, servidor web y renderizado HTML5 — Simulador Web UTPL.">
+  <title>Contenido — Simulador Web | UTPL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.8.0/dist/tabler-icons.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+</head>
+<body>
+
+<a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<!-- ── NAVBAR ────────────────────────────────────────────── -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top" aria-label="Navegación principal">
+  <div class="container">
+    <a class="navbar-brand navbar-brand-custom" href="index.html">
+      <i class="ti ti-world me-2" aria-hidden="true"></i>Simulador<span>Web</span>
+    </a>
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
+            aria-controls="navMenu" aria-expanded="false"
+            aria-label="Abrir menú de navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item">
+          <a class="nav-link " href="index.html"><i class="ti ti-home me-1" aria-hidden="true"></i>Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="solicitud.html"><i class="ti ti-send me-1" aria-hidden="true"></i>Solicitud HTTP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="contenido.html"><i class="ti ti-server me-1" aria-hidden="true"></i>Servidor Web</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="respuesta.html"><i class="ti ti-file-code me-1" aria-hidden="true"></i>Renderizado</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="contacto.html"><i class="ti ti-mail me-1" aria-hidden="true"></i>Recursos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────── -->
+<header class="page-hero" role="banner">
+  <div class="container">
+    <div class="hero-badge fade-up">
+      <i class="ti ti-book" aria-hidden="true"></i> Pasos 2 al 5
+    </div>
+    <h1 class="hero-title fade-up delay-1">
+      El proceso <span>completo de la Web</span>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Desde la solicitud HTTP hasta el renderizado en el navegador — todo explicado paso a paso con diagramas y código real.
+    </p>
+  </div>
+</header>
+
+<!-- ── MAIN ──────────────────────────────────────────────── -->
+<main id="contenido-principal">
+
+  <!-- ── ACORDEÓN PRINCIPAL ────────────────────────────── -->
+  <section class="section-dark" aria-labelledby="titulo-pasos">
+    <div class="container">
+      <h2 class="section-title" id="titulo-pasos">
+        <i class="ti ti-list-numbers" aria-hidden="true"></i> Los pasos del proceso web
+      </h2>
+
+      <div class="accordion accordion-custom" id="acordeonPasos">
+
+        <!-- Paso 2: Solicitud HTTP -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#paso2"
+                    aria-expanded="true" aria-controls="paso2">
+              <span class="badge-teal me-3">PASO 2</span>
+              <i class="ti ti-send me-2" aria-hidden="true"></i> La Solicitud HTTP
+            </button>
+          </h3>
+          <div id="paso2" class="accordion-collapse collapse show" data-bs-parent="#acordeonPasos">
+            <div class="accordion-body">
+              <div class="row g-4 align-items-start">
+                <div class="col-lg-6">
+                  <p>HTTP (<em>HyperText Transfer Protocol</em>) regula la comunicación entre el cliente y el servidor con un modelo simple de <strong>petición–respuesta</strong>.</p>
+                  <div class="table-petronas mt-3">
+                    <table class="table table-borderless mb-0" aria-label="Métodos HTTP principales">
+                      <thead><tr><th scope="col">Método</th><th scope="col">Descripción</th><th scope="col">Uso</th></tr></thead>
+                      <tbody>
+                        <tr><td><span class="badge-teal">GET</span></td><td>Solicita información del servidor</td><td>Navegar páginas</td></tr>
+                        <tr><td><span class="badge-teal">POST</span></td><td>Envía datos al servidor</td><td>Formularios</td></tr>
+                        <tr><td>PUT</td><td>Reemplaza un recurso completo</td><td>Actualizar datos</td></tr>
+                        <tr><td>DELETE</td><td>Elimina un recurso</td><td>Borrar registros</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <p class="mb-2"><strong>Ejemplo real de petición GET:</strong></p>
+                  <pre class="code-block"><code><span class="kw">GET</span> /tecnologias-web HTTP/1.1
+<span class="attr">Host:</span>            <span class="val">www.utpl.edu.ec</span>
+<span class="attr">User-Agent:</span>      <span class="val">Mozilla/5.0 (Chrome/120)</span>
+<span class="attr">Accept:</span>          <span class="val">text/html</span>
+<span class="attr">Accept-Language:</span> <span class="val">es-EC, es;q=0.9</span>
+<span class="attr">Connection:</span>      <span class="val">keep-alive</span>
+<span class="cmt">(sin cuerpo en GET)</span></code></pre>
+                  <div class="alert-petronas p-3 rounded mt-3" role="note">
+                    Documentación oficial:
+                    <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Methods"
+                       target="_blank" rel="noopener noreferrer"
+                       class="text-decoration-none" style="color:var(--teal)">
+                      MDN Web Docs — Métodos HTTP
+                      <i class="ti ti-external-link ms-1" aria-label="Abre en nueva pestaña"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 3: Servidor Web -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#paso3"
+                    aria-expanded="false" aria-controls="paso3">
+              <span class="badge-teal me-3">PASO 3</span>
+              <i class="ti ti-server me-2" aria-hidden="true"></i> Procesamiento en el Servidor
+            </button>
+          </h3>
+          <div id="paso3" class="accordion-collapse collapse" data-bs-parent="#acordeonPasos">
+            <div class="accordion-body">
+              <div class="row g-4">
+                <div class="col-lg-6">
+                  <p>Un <strong>servidor web</strong> escucha solicitudes HTTP en el puerto 80 o 443. Al recibirlas, las procesa y devuelve la respuesta adecuada al cliente.</p>
+
+                  <div class="row g-3 mt-1">
+                    <div class="col-6">
+                      <div class="card-petronas">
+                        <div class="card-body">
+                          <span class="card-icon"><i class="ti ti-file" aria-hidden="true"></i></span>
+                          <h4 class="card-title">Estático</h4>
+                          <p class="card-text">Sirve archivos guardados: HTML, CSS, imágenes, JS.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="card-petronas">
+                        <div class="card-body">
+                          <span class="card-icon"><i class="ti ti-settings" aria-hidden="true"></i></span>
+                          <h4 class="card-title">Dinámico</h4>
+                          <p class="card-text">Ejecuta PHP/Python y genera HTML en tiempo real.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <p class="mb-2"><strong>Cabecera HTTP de respuesta:</strong></p>
+                  <pre class="code-block"><code><span class="kw">HTTP/1.1</span> <span class="val">200 OK</span>
+<span class="attr">Server:</span>         <span class="val">Apache/2.4.57</span>
+<span class="attr">Content-Type:</span>   <span class="val">text/html; charset=UTF-8</span>
+<span class="attr">Content-Length:</span> <span class="val">4823</span>
+<span class="attr">Cache-Control:</span>  <span class="val">max-age=3600, public</span>
+<span class="cmt">(línea en blanco + HTML)</span></code></pre>
+
+                  <div class="table-petronas mt-3">
+                    <table class="table table-borderless mb-0" aria-label="Códigos de estado HTTP">
+                      <thead><tr><th scope="col">Código</th><th scope="col">Significado</th></tr></thead>
+                      <tbody>
+                        <tr><td><span class="badge-success-custom">200</span></td><td>Solicitud exitosa</td></tr>
+                        <tr><td><span class="badge-teal">301</span></td><td>Redirección permanente</td></tr>
+                        <tr><td><span class="badge-err-custom">404</span></td><td>Recurso no encontrado</td></tr>
+                        <tr><td><span class="badge-err-custom">500</span></td><td>Error interno del servidor</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 4: Renderizado HTML5 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#paso4"
+                    aria-expanded="false" aria-controls="paso4">
+              <span class="badge-teal me-3">PASO 4</span>
+              <i class="ti ti-eye me-2" aria-hidden="true"></i> Respuesta y Renderizado HTML5
+            </button>
+          </h3>
+          <div id="paso4" class="accordion-collapse collapse" data-bs-parent="#acordeonPasos">
+            <div class="accordion-body">
+              <p>Al recibir el HTML el navegador construye el <strong>DOM</strong>, aplica CSS para crear el <strong>CSSOM</strong>, los combina en un árbol de renderizado y pinta los píxeles en pantalla.</p>
+
+              <!-- Diagrama pipeline -->
+              <figure class="figure-custom my-3">
+                <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pipeline de renderizado del navegador">
+                  <rect width="700" height="120" fill="#0D1117" rx="8"/>
+                  <rect x="10" y="25" width="110" height="70" rx="6" fill="rgba(0,210,190,0.06)" stroke="rgba(0,210,190,0.3)" stroke-width="1"/>
+                  <text x="65" y="53" text-anchor="middle" font-family="League Spartan,sans-serif" font-size="11" font-weight="800" fill="#00D2BE">HTML</text>
+                  <text x="65" y="70" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="#A8A9AD">del servidor</text>
+                  <line x1="121" y1="60" x2="139" y2="60" stroke="#4A5568" stroke-width="1.5"/>
+                  <polygon points="139,55 151,60 139,65" fill="#4A5568"/>
+                  <rect x="151" y="25" width="110" height="70" rx="6" fill="rgba(0,161,156,0.06)" stroke="rgba(0,161,156,0.26)" stroke-width="1"/>
+                  <text x="206" y="53" text-anchor="middle" font-family="League Spartan,sans-serif" font-size="11" font-weight="800" fill="#00A19C">DOM</text>
+                  <text x="206" y="70" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="#A8A9AD">árbol nodos</text>
+                  <line x1="262" y1="60" x2="280" y2="60" stroke="#4A5568" stroke-width="1.5"/>
+                  <polygon points="280,55 292,60 280,65" fill="#4A5568"/>
+                  <rect x="292" y="25" width="110" height="70" rx="6" fill="rgba(0,122,118,0.06)" stroke="rgba(0,122,118,0.26)" stroke-width="1"/>
+                  <text x="347" y="53" text-anchor="middle" font-family="League Spartan,sans-serif" font-size="10" font-weight="800" fill="#007A76">CSSOM</text>
+                  <text x="347" y="70" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="#A8A9AD">árbol estilos</text>
+                  <line x1="403" y1="60" x2="421" y2="60" stroke="#4A5568" stroke-width="1.5"/>
+                  <polygon points="421,55 433,60 421,65" fill="#4A5568"/>
+                  <rect x="433" y="18" width="120" height="84" rx="6" fill="rgba(0,161,156,0.07)" stroke="rgba(0,161,156,0.28)" stroke-width="1"/>
+                  <text x="493" y="46" text-anchor="middle" font-family="League Spartan,sans-serif" font-size="10" font-weight="800" fill="#00A19C">RENDER</text>
+                  <text x="493" y="60" text-anchor="middle" font-family="League Spartan,sans-serif" font-size="10" font-weight="800" fill="#00A19C">TREE</text>
+                  <text x="493" y="76" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="#A8A9AD">layout+paint</text>
+                  <line x1="554" y1="60" x2="572" y2="60" stroke="#4A5568" stroke-width="1.5"/>
+                  <polygon points="572,55 584,60 572,65" fill="#4A5568"/>
+                  <rect x="584" y="25" width="106" height="70" rx="6" fill="rgba(0,210,190,0.1)" stroke="rgba(0,210,190,0.4)" stroke-width="1.5"/>
+                  <text x="637" y="53" text-anchor="middle" font-family="League Spartan,sans-serif" font-size="10" font-weight="800" fill="#00D2BE">PANTALLA</text>
+                  <text x="637" y="70" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="#00D2BE">el usuario ve</text>
+                </svg>
+                <figcaption>Figura 2 — Pipeline de renderizado del navegador. Elaborado por el autor.</figcaption>
+              </figure>
+
+              <!-- Tabla etiquetas semánticas -->
+              <h4 class="section-title mt-4" style="font-size:.78rem;" id="titulo-semantica">
+                <i class="ti ti-tag" aria-hidden="true"></i>Etiquetas semánticas HTML5
+              </h4>
+              <div class="table-petronas">
+                <table class="table table-borderless mb-0" aria-label="Etiquetas semánticas HTML5">
+                  <thead><tr><th scope="col">Etiqueta</th><th scope="col">Propósito semántico</th><th scope="col">Ejemplo de uso</th></tr></thead>
+                  <tbody>
+                    <tr><td>&lt;header&gt;</td><td>Encabezado de página o sección</td><td>Logo, título, búsqueda</td></tr>
+                    <tr><td>&lt;nav&gt;</td><td>Navegación principal</td><td>Menú de enlaces</td></tr>
+                    <tr><td>&lt;main&gt;</td><td>Contenido principal único</td><td>Artículo, formulario</td></tr>
+                    <tr><td>&lt;section&gt;</td><td>Agrupación temática</td><td>Bloque "Acerca de"</td></tr>
+                    <tr><td>&lt;article&gt;</td><td>Contenido independiente</td><td>Entrada de blog</td></tr>
+                    <tr><td>&lt;aside&gt;</td><td>Contenido complementario</td><td>Barra lateral</td></tr>
+                    <tr><td>&lt;footer&gt;</td><td>Pie de página</td><td>Copyright, contacto</td></tr>
+                    <tr><td>&lt;figure&gt;</td><td>Contenido ilustrativo</td><td>Imagen con caption</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 5: Ejemplo práctico -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#paso5"
+                    aria-expanded="false" aria-controls="paso5">
+              <span class="badge-teal me-3">PASO 5</span>
+              <i class="ti ti-layout me-2" aria-hidden="true"></i> Ejemplo Práctico — Mini página renderizada
+            </button>
+          </h3>
+          <div id="paso5" class="accordion-collapse collapse" data-bs-parent="#acordeonPasos">
+            <div class="accordion-body">
+              <p>Estructura semántica de una página HTML5 correctamente organizada:</p>
+              <pre class="code-block"><code><span class="cmt">&lt;!-- Estructura HTML5 semántica --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="val">"es"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset=</span><span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>Mi Página<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;header&gt;</span><span class="tag">&lt;h1&gt;</span>Título<span class="tag">&lt;/h1&gt;&lt;/header&gt;</span>
+  <span class="tag">&lt;nav&gt;</span><span class="tag">&lt;ul&gt;&lt;li&gt;&lt;a</span> <span class="attr">href=</span><span class="val">"#"</span><span class="tag">&gt;</span>Inicio<span class="tag">&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;</span>
+  <span class="tag">&lt;main&gt;</span>
+    <span class="tag">&lt;section&gt;</span>
+      <span class="tag">&lt;h2&gt;</span>Sección<span class="tag">&lt;/h2&gt;</span>
+      <span class="tag">&lt;p&gt;</span>Contenido.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/section&gt;</span>
+  <span class="tag">&lt;/main&gt;</span>
+  <span class="tag">&lt;footer&gt;&lt;p&gt;</span>&amp;copy; 2026<span class="tag">&lt;/p&gt;&lt;/footer&gt;</span>
+<span class="tag">&lt;/body&gt;&lt;/html&gt;</span></code></pre>
+
+              <div class="row g-3 mt-2">
+                <div class="col-md-6">
+                  <div class="alert-petronas p-3 rounded" role="note">
+                    <strong>Beneficios del HTML semántico:</strong>
+                    <ul class="list-petronas mt-2">
+                      <li>Mejora la accesibilidad para lectores de pantalla</li>
+                      <li>Favorece el SEO en motores de búsqueda</li>
+                      <li>Código más legible y mantenible</li>
+                      <li>Cumple los estándares W3C</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- Mini demo de formulario -->
+                  <form aria-label="Formulario de ejemplo HTML5">
+                    <div class="mb-3">
+                      <label for="demo-nombre" class="form-label-custom">Nombre:</label>
+                      <input type="text" id="demo-nombre" class="form-control form-control-custom" placeholder="Tu nombre" aria-required="true">
+                    </div>
+                    <div class="mb-3">
+                      <label for="demo-email" class="form-label-custom">Email:</label>
+                      <input type="email" id="demo-email" class="form-control form-control-custom" placeholder="tu@correo.com" aria-required="true">
+                    </div>
+                    <button type="button" class="btn btn-teal w-100"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Este formulario es solo demostrativo">
+                      <i class="ti ti-send me-1" aria-hidden="true"></i>Enviar (demo)
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- fin acordeón -->
+    </div>
+  </section>
+
+  <!-- Comparativa HTTP vs HTTPS -->
+  <section class="section-card" aria-labelledby="titulo-http-https">
+    <div class="container">
+      <h2 class="section-title" id="titulo-http-https">
+        <i class="ti ti-table" aria-hidden="true"></i> HTTP vs HTTPS
+      </h2>
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="table-petronas">
+            <table class="table table-borderless mb-0" aria-label="Comparativa HTTP vs HTTPS">
+              <thead><tr><th scope="col">Característica</th><th scope="col">HTTP</th><th scope="col">HTTPS</th></tr></thead>
+              <tbody>
+                <tr><td>Puerto predeterminado</td><td>80</td><td>443</td></tr>
+                <tr><td>Cifrado</td><td><span class="badge-err-custom">No</span></td><td><span class="badge-success-custom">Sí (TLS/SSL)</span></td></tr>
+                <tr><td>Seguridad de datos</td><td>Baja</td><td>Alta</td></tr>
+                <tr><td>Certificado SSL</td><td><span class="badge-err-custom">No requerido</span></td><td><span class="badge-success-custom">Requerido</span></td></tr>
+                <tr><td>SEO Google</td><td><span class="badge-err-custom">Penalizado</span></td><td><span class="badge-success-custom">Favorecido</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card-petronas h-100">
+            <div class="card-body">
+              <span class="card-icon"><i class="ti ti-lock" aria-hidden="true"></i></span>
+              <h3 class="card-title">¿Por qué HTTPS?</h3>
+              <p class="card-text">HTTPS cifra toda la comunicación entre el navegador y el servidor mediante TLS/SSL, protegiendo contraseñas, datos personales y transacciones financieras.</p>
+              <span class="badge-teal">Puerto :443</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navegación entre páginas -->
+  <section class="section-dark" aria-labelledby="titulo-nav-paginas">
+    <div class="container text-center">
+      <h2 class="section-title justify-content-center" id="titulo-nav-paginas">
+        <i class="ti ti-arrow-right-circle" aria-hidden="true"></i> ¿Qué sigue?
+      </h2>
+      <p class="mb-4">Consulta recursos adicionales, valida el código W3C y completa el formulario de contacto.</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="index.html" class="btn btn-outline-teal">
+          <i class="ti ti-arrow-left me-1" aria-hidden="true"></i>Volver al Inicio
+        </a>
+        <a href="contacto.html" class="btn btn-teal">
+          <i class="ti ti-mail me-1" aria-hidden="true"></i>Recursos y Contacto
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer-custom" role="contentinfo">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5><i class="ti ti-world me-2" aria-hidden="true"></i>SimuladorWeb</h5>
+        <p>Mini sitio educativo que explica el funcionamiento de la Web desde la URL hasta el renderizado.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Páginas</h5>
+        <ul class="list-unstyled">
+          <li><a href="index.html"><i class="ti ti-home me-1" aria-hidden="true"></i>Inicio</a></li>
+          <li><a href="contenido.html"><i class="ti ti-book me-1" aria-hidden="true"></i>Contenido</a></li>
+          <li><a href="contacto.html"><i class="ti ti-mail me-1" aria-hidden="true"></i>Recursos</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Estudiante</h5>
+        <p>Josué Jara Panchez<br>Tecnologías Web — UTPL<br>Primer Bimestre 2026</p>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <p class="text-center mb-0">
+      &copy; 2026 <strong>Josué Jara Panchez</strong> &bull; UTPL &bull; Tecnologías Web &bull;
+      Framework: <strong>Bootstrap 5.3</strong>
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
